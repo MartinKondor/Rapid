@@ -5,8 +5,6 @@ import { GameEngine } from 'react-native-game-engine';
 import entities from './entities';
 import Physics from './physics';
 import { Dimensions } from "react-native";
-import Player from './components/Player';
-import { Engine } from 'matter-js';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
