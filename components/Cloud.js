@@ -1,8 +1,9 @@
 import Matter from "matter-js";
 import React from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 
-const Player = (props) => {
+
+const Cloud = (props) => {
     const widthBody = props.body.bounds.max.x - props.body.bounds.min.x;
     const heightBody = props.body.bounds.max.y - props.body.bounds.min.y;
 
@@ -20,38 +21,42 @@ const Player = (props) => {
             width: widthBody,
             height: heightBody
         }}>
-            <View style={{
-                shadowColor: "green",
-                shadowOpacity: 1.0,
-                shadowRadius: "15px",
 
-                backgroundColor: "green",
-                position: 'absolute',
-                left: widthBody / 4,
-                top: heightBody / 4,
-                width: widthBody - widthBody / 2,
-                height: heightBody - heightBody / 2
-            }}>
-            </View>
+            <Image
+                style={{
+                    width: widthBody,
+                    height: heightBody,
+                }}
+                source={require('../assets/mountain_background/clouds.png')}
+            />
+
         </View>
     )
 }
 
 export default (world, color, pos, size) => {
-    const initialPlayer = Matter.Bodies.rectangle(
+    const initialCloud = Matter.Bodies.rectangle(
         pos.x,
         pos.y,
         size.width,
         size.height,
         {
-            label: "Player"
+            label: "Cloud",
+            isStatic: true
         }
     );
-    Matter.World.add(world, initialPlayer);
+
+    initialCloud.collisionFilter = {
+        'group': -1,
+        'category': 2,
+        'mask': 0,
+    };
+
+    Matter.World.add(world, initialCloud);
     return {
-        body: initialPlayer,
+        body: initialCloud,
         color,
         pos,
-        renderer: <Player/>
+        renderer: <Cloud/>
     }
 }

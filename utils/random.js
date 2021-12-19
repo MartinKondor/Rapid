@@ -13,31 +13,34 @@ export const getPipeSizePosPair = (addToPosX=0) => {
         width: 128
     }
 
+    const MIN_Y = 125;
+    const MAX_Y = windowHeight - 125;
+
     const pipeTop1 = {
         pos: {
             x: windowWidth + addToPosX,
-            y: getRandom(sizeProps.height / 2, windowHeight / 2 - sizeProps.height / 2)
-        },
-        size: sizeProps
-    };
-    const pipeBottom1 = {
-        pos: {
-            x: windowWidth + addToPosX,
-            y: getRandom(windowHeight - sizeProps.height / 2, windowHeight / 2 + sizeProps.height / 2)
+            y: getRandom(MIN_Y, MIN_Y + sizeProps.height)
         },
         size: sizeProps
     };
     const pipeTop2 = {
         pos: {
             x: windowWidth + addToPosX,
-            y: getRandom(sizeProps.height / 2, windowHeight / 2 - sizeProps.height / 2)
+            y: getRandom(MIN_Y + 1.5 * sizeProps.height, MIN_Y + 2.5 * sizeProps.height)
+        },
+        size: sizeProps
+    };
+    const pipeBottom1 = {
+        pos: {
+            x: windowWidth + addToPosX,
+            y: getRandom(MIN_Y + 3 * sizeProps.height, MIN_Y + 6 * sizeProps.height)
         },
         size: sizeProps
     };
     const pipeBottom2 = {
         pos: {
             x: windowWidth + addToPosX,
-            y: getRandom(windowHeight - sizeProps.height / 2, windowHeight / 2 + sizeProps.height / 2)
+            y: getRandom(MIN_Y + 6.5 * sizeProps.height, MAX_Y)
         },
         size: sizeProps
     };

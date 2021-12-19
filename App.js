@@ -5,6 +5,8 @@ import { GameEngine } from 'react-native-game-engine';
 import entities from './entities';
 import Physics from './physics';
 import { Dimensions } from "react-native";
+import Player from './components/Player';
+import { Engine } from 'matter-js';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -125,10 +127,10 @@ export default function App() {
         {/** RESUME button */}
         {paused ?
         <TouchableOpacity style={{
-            shadowColor: "white",
+            shadowColor: "black",
             shadowOpacity: 0.7,
             shadowRadius: "25px",
-            backgroundColor: "black",
+            backgroundColor: "white",
             paddingHorizontal: 30,
             paddingVertical: 10
           }}
@@ -138,7 +140,7 @@ export default function App() {
           }}>
           <Text style={{
             fontWeight: "bold",
-            color: "white",
+            color: "black",
             fontSize: 40
           }}>
             RESUME
