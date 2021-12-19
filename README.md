@@ -1,4 +1,4 @@
-<p align="center"><img src="gameplay_example.gif" width="150px" title="Gameplay Example"></p>
+<p align="center"><img src="gameplay.gif" width="150px" title="Gameplay Example"></p>
 
 # Rapid
 
