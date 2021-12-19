@@ -12,8 +12,13 @@ const windowHeight = Dimensions.get('window').height;
 export default function App() {
   const [running, setRunning] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [gameOverState, setGameOverState] = useState(false);
   const [gameEngine, setGameEngine] = useState(null);
   const [currentPoints, setCurrentPoints] = useState(0);
+
+  const saveHighScore = () => {
+    
+  }
 
   useEffect(() => {
     setRunning(false);
@@ -50,6 +55,8 @@ export default function App() {
             case "game_over":
               setRunning(false);
               setPaused(false);  // Make sure it is false
+              setGameOverState(true);
+              saveHighScore();
               gameEngine.stop();
               break;
             case "new_point":
@@ -122,7 +129,7 @@ export default function App() {
           position: "absolute"
         }}></View>
 
-        {/** RESUME button */}
+        {/** Score text and RESUME button */}
         {paused ?
         <TouchableOpacity style={{
             shadowColor: "black",
@@ -157,6 +164,7 @@ export default function App() {
             marginTop: 25
           }}
           onPress={() => {
+            setGameOverState(false);
             setRunning(true);
             gameEngine.swap(entities());
             setCurrentPoints(0);
@@ -167,28 +175,6 @@ export default function App() {
             fontSize: 40
           }}>
             NEW GAME
-          </Text>
-        </TouchableOpacity>
-
-        {/** HIGH SCORE button */}
-        <TouchableOpacity style={{
-            shadowColor: "black",
-            shadowOpacity: 0.4,
-            shadowRadius: "25px",
-            backgroundColor: "white",
-            paddingHorizontal: 30,
-            paddingVertical: 10,
-            marginTop: 25
-          }}
-          onPress={() => {
-            // TODO: Show high score table
-          }}>
-          <Text style={{
-            fontWeight: "bold",
-            color: "black",
-            fontSize: 40
-          }}>
-            HIGH SCORE
           </Text>
         </TouchableOpacity>
 

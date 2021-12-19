@@ -5,10 +5,16 @@ import { Dimensions } from "react-native";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 let passedObstacles = 0;
+let startTime = 0;
 
 const Physics = (entities, {touches, time, dispatch}) => {
     let engine = entities.physics.engine;
-    const BASE_SPEED_X = 3;
+    if (startTime == 0) {
+        startTime = time.current;
+    }
+
+    // Increase speed with time
+    const BASE_SPEED_X = 3 + (time.current - startTime) / 12500;
 
     touches.filter(t => t.type === "press")
     .forEach(t => {
@@ -87,9 +93,10 @@ const Physics = (entities, {touches, time, dispatch}) => {
         Matter.Body.setPosition(entities[`SmallMountain2`].body, {x: windowWidth + windowWidth / 2 + (405)/2, y: windowHeight - 84 - 143/2}, {height: 143, width: 405});
     }
 
-    Matter.Body.translate(entities[`Sun`].body, {x: -0.01*BASE_SPEED_X, y: -0.01});
+    Matter.Body.translate(entities[`Sun`].body, {x: 0, y: -0.01});
 
     Matter.Events.on(engine, "collisionStart", (event) => {
+        startTime = 0;
         dispatch({ type: "game_over" });
     });
 
