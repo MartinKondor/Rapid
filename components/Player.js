@@ -1,6 +1,6 @@
 import Matter from "matter-js";
 import React from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 
 const Player = (props) => {
     const widthBody = props.body.bounds.max.x - props.body.bounds.min.x;
@@ -20,19 +20,15 @@ const Player = (props) => {
             width: widthBody,
             height: heightBody
         }}>
-            <View style={{
-                shadowColor: "green",
-                shadowOpacity: 1.0,
-                shadowRadius: "15px",
 
-                backgroundColor: "green",
-                position: 'absolute',
-                left: widthBody / 4,
-                top: heightBody / 4,
-                width: widthBody - widthBody / 2,
-                height: heightBody - heightBody / 2
-            }}>
-            </View>
+            <Image
+                style={{
+                    width: widthBody,
+                    height: heightBody
+                }}
+                source={require('../assets/bird/frame-2.png')}
+            />
+
         </View>
     )
 }

@@ -24,12 +24,13 @@ export default (restart) => {
 
     return {
         physics: {engine, world},
+
+        Sun: Sun(world, 'transparent', {x: windowWidth - 184/2/2, y: 184/2/2}, {height: 184/2, width: 196/2}),
+
         Cloud1: Cloud(world, 'transparent', {x: 3 * windowWidth / 4, y: windowHeight*0.2}, {height: 255/2, width: 317/2}),
         Cloud2: Cloud(world, 'transparent', {x: windowWidth + 3 * windowWidth / 4, y: windowHeight*0.3}, {height: 255/2, width: 317/2}),
         Cloud3: Cloud(world, 'transparent', {x: windowWidth / 4, y: windowHeight*0.4}, {height: 255/3, width: 317/3}),
         Cloud4: Cloud(world, 'transparent', {x: windowWidth + windowWidth / 4, y: windowHeight*0.5}, {height: 255/4, width: 317/4}),
-
-        Sun: Sun(world, 'transparent', {x: windowWidth, y: 184/2}, {height: 184, width: 196}),
 
         Mountain1: Mountain(world, 'transparent', {x: windowWidth / 2, y: windowHeight - 84 - 260/2}, {height: 260, width: 775}),
         Mountain2: Mountain(world, 'transparent', {x: windowWidth + windowWidth / 2 + (775-150)/2, y: windowHeight - 84 - 260/2}, {height: 260, width: 775}),
@@ -37,7 +38,7 @@ export default (restart) => {
         SmallMountain1: SmallMountain(world, 'transparent', {x: windowWidth / 2, y: windowHeight - 84 - 143/2}, {height: 143, width: 405}),
         SmallMountain2: SmallMountain(world, 'transparent', {x: windowWidth + windowWidth / 2 + 143/2, y: windowHeight - 84 - 143/2}, {height: 143, width: 405}),
 
-        Player: Player(world, 'white', {x: 40, y: windowHeight / 2}, {height: 20, width: 20}),
+        Player: Player(world, 'transparent', {x: 40, y: windowHeight / 2}, {height: 1.5*20, width: 1.5*20}),
 
         ObstacleTop11: Obstacle(world, 'ObstacleTop11', 'transparent', pipeSizePosA.pipeTop1.pos, pipeSizePosA.pipeTop1.size),
         ObstacleBottom11: Obstacle(world, 'ObstacleBottom11', 'transparent', pipeSizePosA.pipeBottom1.pos, pipeSizePosA.pipeBottom1.size),

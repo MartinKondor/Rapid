@@ -4,7 +4,9 @@
 
 Rapid is a mobile game, built in React Native, with the help of Matter.js and React-Native-Game-Engine.
 
-Artworks thanks to: [grumpydiamond](http://opengameart.org/users/grumpydiamond), make sure to check out his amazing works of art!
+* Artworks thanks to: [grumpydiamond](http://opengameart.org/users/grumpydiamond)!
+
+* Player bird is thanks to: [bevouliin.com](https://opengameart.org/users/bevouliincom)!
 
 ## Authors
 

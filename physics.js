@@ -5,16 +5,12 @@ import { Dimensions } from "react-native";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 let passedObstacles = 0;
-let startTime = 0;
 
 const Physics = (entities, {touches, time, dispatch}) => {
     let engine = entities.physics.engine;
-    if (startTime == 0) {
-        startTime = time.current;
-    }
 
     // Increase speed with time
-    const BASE_SPEED_X = 3 + (time.current - startTime) / 12500;
+    const BASE_SPEED_X = 3 + passedObstacles / 7;
 
     touches.filter(t => t.type === "press")
     .forEach(t => {
@@ -42,6 +38,7 @@ const Physics = (entities, {touches, time, dispatch}) => {
             Matter.Body.setPosition(entities[`ObstacleBottom${i}1`].body, pipeSizePos.pipeBottom1.pos);
             Matter.Body.setPosition(entities[`ObstacleTop${i}2`].body, pipeSizePos.pipeTop2.pos);
             Matter.Body.setPosition(entities[`ObstacleBottom${i}2`].body, pipeSizePos.pipeBottom2.pos);
+            passedObstacles++;
         }
 
         Matter.Body.translate(entities[`ObstacleTop${i}1`].body, {x: -BASE_SPEED_X, y: 0});
@@ -75,8 +72,8 @@ const Physics = (entities, {touches, time, dispatch}) => {
         Matter.Body.setPosition(entities[`Cloud4`].body, {x: getRandom(windowWidth + 317/4, windowWidth + 2*317/4), y: getRandom(windowHeight*0.4, windowHeight*0.5)}, {height: 255/4, width: 317/4});
     }
 
-    Matter.Body.translate(entities[`Mountain1`].body, {x: -(0.3)*BASE_SPEED_X, y: 0});
-    Matter.Body.translate(entities[`Mountain2`].body, {x: -(0.3)*BASE_SPEED_X, y: 0});
+    Matter.Body.translate(entities[`Mountain1`].body, {x: -(0.25)*BASE_SPEED_X, y: 0});
+    Matter.Body.translate(entities[`Mountain2`].body, {x: -(0.25)*BASE_SPEED_X, y: 0});
     if (entities[`Mountain1`].body.bounds.max.x <= 0) {
         Matter.Body.setPosition(entities[`Mountain1`].body, {x: windowWidth + windowWidth / 2 + (775-150)/2, y: windowHeight - 84 - 260/2}, {height: 260, width: 775});
     }
@@ -84,8 +81,8 @@ const Physics = (entities, {touches, time, dispatch}) => {
         Matter.Body.setPosition(entities[`Mountain2`].body, {x: windowWidth + windowWidth / 2 + (775-150)/2, y: windowHeight - 84 - 260/2}, {height: 260, width: 775});
     }
 
-    Matter.Body.translate(entities[`SmallMountain1`].body, {x: -(0.4)*BASE_SPEED_X, y: 0});
-    Matter.Body.translate(entities[`SmallMountain2`].body, {x: -(0.4)*BASE_SPEED_X, y: 0});
+    Matter.Body.translate(entities[`SmallMountain1`].body, {x: -(0.35)*BASE_SPEED_X, y: 0});
+    Matter.Body.translate(entities[`SmallMountain2`].body, {x: -(0.35)*BASE_SPEED_X, y: 0});
     if (entities[`SmallMountain1`].body.bounds.max.x <= 0) {
         Matter.Body.setPosition(entities[`SmallMountain1`].body, {x: windowWidth + windowWidth / 2 + (405)/2, y: windowHeight - 84 - 143/2}, {height: 143, width: 405});
     }
@@ -96,7 +93,7 @@ const Physics = (entities, {touches, time, dispatch}) => {
     Matter.Body.translate(entities[`Sun`].body, {x: 0, y: -0.01});
 
     Matter.Events.on(engine, "collisionStart", (event) => {
-        startTime = 0;
+        passedObstacles = 0;
         dispatch({ type: "game_over" });
     });
 
